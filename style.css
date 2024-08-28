@@ -1,0 +1,45 @@
+﻿body {
+    background-color: gainsboro;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    border: 1px solid #ddd;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    margin-top: 10px;
+}
+
+.navbar {
+    background-color: lightslategray;
+    top: 0;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px;
+}
+
+.custom-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 20px;
+    text-decoration: none;
+}
+
+    .custom-button:hover {
+        color: greenyellow;
+    }
+
+.errormsg {
+    text-align: center;
+    color: red;
+    font-size: 16px;
+}
+
+.abc {
+    margin-top: 20vh;
+}

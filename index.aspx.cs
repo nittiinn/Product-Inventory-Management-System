@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -41,10 +41,6 @@ public partial class index : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@ProductionDate", txtProductionDate.Text);
                 cmd.Parameters.AddWithValue("@Quantity", txtQuantity.Text);
                 cmd.Parameters.AddWithValue("@Shift", ddShift.SelectedValue);
-
-
-
-
                 try
                 {
                     conn.Open();
@@ -73,8 +69,6 @@ public partial class index : System.Web.UI.Page
         }
 
     }
-
-
 
     protected void CreateGraph()
     {
@@ -220,24 +214,35 @@ public partial class index : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-        string ProductName = txtSearch.Text.Trim(); 
+        string ProductName = txtSearch.Text.Trim();
 
         if (!string.IsNullOrEmpty(ProductName))
         {
-            BindGridView1(ProductName); 
+            // Bind GridView with search results
+            BindGridView1(ProductName);
+
+            // Check if any results were found and show an alert if no results were found
+            if (GridView2.Rows.Count == 0)
+            {
+                string script = "alert('No products found matching the search criteria.');";
+                ClientScript.RegisterStartupScript(this.GetType(), "NoResultsAlert", script, true);
+            }
         }
         else
         {
+            // Show an alert if no product name was entered
             string script = "alert('Please enter a product name to search.');";
-            
-            ClientScript.RegisterStartupScript(this.GetType(), "SearchAlert", script, true);         
+            ClientScript.RegisterStartupScript(this.GetType(), "SearchAlert", script, true);
         }
 
+        // Update visibility of panels/cards as needed
+        hero.Visible = false;
         productSearch.Visible = true;
         cardThree.Visible = false;
         cardOne.Visible = false;
         cardtwo.Visible = false;
     }
+
 
     private void BindGridView1(string ProductName)
     {
@@ -276,6 +281,7 @@ public partial class index : System.Web.UI.Page
         cardOne.Visible = true;
         cardtwo.Visible = false ;
         productSearch.Visible = false;
+        hero.Visible = false;
     }
 
     protected void btnSecond_Click(object sender, EventArgs e)
@@ -284,11 +290,22 @@ public partial class index : System.Web.UI.Page
         cardOne.Visible = false;
         cardtwo.Visible = true;
         productSearch.Visible = false;
+        hero.Visible = false;
     }
 
     protected void btnThird_Click(object sender, EventArgs e)
     {
         cardThree.Visible = true;
+        cardOne.Visible = false;
+        cardtwo.Visible = false;
+        productSearch.Visible = false;
+        hero.Visible = false;
+    }
+
+    protected void btnHome_Click(object sender, EventArgs e)
+    {
+        hero.Visible = true;
+        cardThree.Visible = false;
         cardOne.Visible = false;
         cardtwo.Visible = false;
         productSearch.Visible = false;
